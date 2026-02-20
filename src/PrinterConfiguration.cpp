@@ -82,8 +82,8 @@ PrinterConfiguration &PrinterConfiguration::operator=(const PrinterConfiguration
 QDataStream &operator<<(QDataStream &stream, const PrinterConfiguration &printerConfiguration)
 {
     stream << qint32(printerConfiguration.version);
+    stream << qint32(printerConfiguration.m_pages.count());
 
-    stream << printerConfiguration.m_pages.count();
     QListIterator<Page *> pageIterator(printerConfiguration.m_pages);
 
     while (pageIterator.hasNext()) {
