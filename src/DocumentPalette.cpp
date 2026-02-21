@@ -39,7 +39,7 @@ public:
 DocumentPaletteData::DocumentPaletteData()
     : QSharedData()
     , m_schemeName(Configuration::palette_DefaultScheme())
-    , m_symbolLibrary(QLatin1String("kxstitch"))
+    , m_symbolLibrary(Configuration::palette_DefaultSymbolLibrary())
     , m_currentIndex(-1)
 {
 }
