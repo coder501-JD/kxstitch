@@ -74,6 +74,8 @@ private:
     QMap<int, FlossUsage> m_flossUsage;
     FlossScheme *m_scheme;
     SymbolSelectorDlg *m_symbolSelectorDlg;
+
+    static bool isSettingUp;
 };
 
 #endif // PaletteManagerDlg_H

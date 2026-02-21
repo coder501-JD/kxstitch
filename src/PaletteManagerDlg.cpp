@@ -51,10 +51,14 @@ PaletteManagerDlg::PaletteManagerDlg(QWidget *parent, Document *document)
     setWindowTitle(i18n("Palette Manager"));
     ui.setupUi(this);
 
+    isSettingUp = true; // avoid triggering events during initialisation of the dialog.
+
     ui.SymbolLibrary->insertItems(0, SymbolManager::libraries());
     ui.SymbolLibrary->setCurrentItem(m_dialogPalette.symbolLibrary());
 
     fillLists();
+
+    isSettingUp = false;
 }
 
 PaletteManagerDlg::~PaletteManagerDlg()
@@ -182,6 +186,8 @@ void PaletteManagerDlg::on_BackstitchStrands_activated(int index)
 
 void PaletteManagerDlg::on_SymbolLibrary_currentTextChanged(const QString &library)
 {
+    if (isSettingUp) return;
+
     m_dialogPalette.setSymbolLibrary(library);
 
     if (library != m_dialogPalette.symbolLibrary()) {
@@ -436,5 +442,7 @@ bool PaletteManagerDlg::symbolsAvailable() const
 {
     return (SymbolManager::library(m_dialogPalette.symbolLibrary())->indexes().count() > m_dialogPalette.flosses().count());
 }
+
+bool PaletteManagerDlg::isSettingUp = false;
 
 #include "moc_PaletteManagerDlg.cpp"
